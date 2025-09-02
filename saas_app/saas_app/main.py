@@ -8,6 +8,8 @@ from saas_app.db_connection import get_engine, get_session
 from saas_app.models import Base
 from saas_app.operations import add_user
 from saas_app.security import router as security_router
+from saas_app.premium_access import router as premium_router
+from saas_app.rbac import router as rbac_router
 from saas_app.responses import (
     UserCreateBody,
     UserCreateResponse,
@@ -25,6 +27,8 @@ app = FastAPI(
     )
 
 app.include_router(security_router)
+app.include_router(premium_router)
+app.include_router(rbac_router)
 
 @app.post(
     "/register/user",

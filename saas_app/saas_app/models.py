@@ -4,6 +4,11 @@ from sqlalchemy.orm import (
     mapped_column,
 )
 
+from enum import Enum
+
+class Role(str, Enum):
+    basic = "basic"
+    premium = "premium"
 
 class Base(DeclarativeBase):
     pass
@@ -21,3 +26,7 @@ class User(Base):
         unique=True, index=True
     )
     hashed_password: Mapped[str]
+
+    role : Mapped[Role] = mapped_column(
+        default=Role.basic
+    )
