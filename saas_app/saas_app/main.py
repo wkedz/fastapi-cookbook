@@ -7,6 +7,7 @@ from fastapi import FastAPI, Depends, HTTPException, status
 from saas_app.db_connection import get_engine, get_session
 from saas_app.models import Base
 from saas_app.operations import add_user
+from saas_app.security import router as security_router
 from saas_app.responses import (
     UserCreateBody,
     UserCreateResponse,
@@ -23,6 +24,7 @@ app = FastAPI(
     lifespan=lifespan,
     )
 
+app.include_router(security_router)
 
 @app.post(
     "/register/user",
